@@ -3,10 +3,10 @@
 
 def init_board():
 
-    dots = "."
-    square = 9
+    dots = "." #puste pole na planszy
+    square = 9 #liczba pól na planszy
 
-    board = []
+    board = [] #nowa plansza,( elementy mają wartość dots )
     for square in range(square):
         board.append(dots)
 

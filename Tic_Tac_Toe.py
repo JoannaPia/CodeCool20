@@ -19,6 +19,8 @@ def init_board():
     print("\t""C", board[6], "|", board[7], "|", board[8], "\n")
 
 
+def mark():
+
 
 
 def main():

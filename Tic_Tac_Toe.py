@@ -11,7 +11,7 @@ def init_board():
         board.append(dots)
 
 
-    print("\n\t", "1""  "  , "2""  " ,  "3" )
+    print("\n\t",  " 1"" "  , " 2"" " ,  " 3" )
     print("\n\t""A" , board[0], "|", board[1], "|", board[2])
     print("\t",   "---------")
     print("\t""B", board[3], "|", board[4], "|", board[5])
@@ -19,7 +19,7 @@ def init_board():
     print("\t""C", board[6], "|", board[7], "|", board[8], "\n")
 
 
-def mark():
+#def mark():
 
 
 

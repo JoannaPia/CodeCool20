@@ -3,8 +3,6 @@ o = "o"
 
 board = ['.','.','.','.','.','.','.','.','.']
 
-total_moves = 0
-
 
 def start_game():
     print("""\n
@@ -21,11 +19,16 @@ def start_game():
                                 GOOD LUCK! """)
 
     init_board(9)
-    question_start_game()
 
     
-def init_board(number): # w nawiasie zmienna, którą mozemy zmieniać
+def init_board(number):
     
+# board = [['A1','A2','A3'],['B1','B2','B3'],['C1','C2','C3']]
+
+# for row in range(len(board)):
+#     for col in range(len(board[row])):
+#         print(board[row][col], end=' ')
+#     print()
 
 
     board = {
@@ -42,51 +45,6 @@ def init_board(number): # w nawiasie zmienna, którą mozemy zmieniać
     print("\t",   "---------")
     print("\t""C", board['C1'], "|", board['C2'], "|", board['C3'], "\n")
 
-def ask_yes_no(question):
-
-    response = None
-    while response not in ("yes", "no"):
-        response = input(question).lower()
-    return response
-
-def question_start_game():
-
-    computer_question = ask_yes_no("Do you want go first ? Answer yes or no:")
-    if computer_question.upper() == "yes":
-        print("You will start the game.")
-    elif computer_question.upper() == "no":
-        print("Quit")
-        quit()
-
-def ask_x_o(choice):
-
-    response = None
-    while response not in ("x", "o"):
-        response = input(choice).lower()
-    return response
-
-
-#Implement making a move 
-def making_a_move():
-
-    user1 = ask_x_o("Now you will choice X or O: ")
-
-    while True:
-        if total_moves == 9:
-            break
-
-    while True:
-        if user1.upper() == "X":
-            user2 = "O"
-            print("Excellent.You will be. " +  user1 + " and user2 will be " + user2 + "!")
-            return user1.upper(), user2
-        elif user1.upper() == "O":
-            user2 = "X"
-            print("Great. You will be: " + user1 + " and user2 will be " + user2 + "!")
-            return user1.upper(), user2
-        else:
-            user1 = input("You need pick x or o. Try again.")
-
 
 def is_full(board): #Check for a full board
 
@@ -99,55 +57,73 @@ def is_full(board): #Check for a full board
 
 
 def print_result(): 
-    if board['A1'] == 'X' and board['A2'] == 'X' and board['A3'] == 'X':
-        print("Player one won!")
-        return 1
-    if board['B1'] == 'X' and board['B2'] == 'X' and board['B3'] == 'X':
-        print("Player one won!")
-        return 1
-    if board['C1'] == 'X' and board['C2'] == 'X' and board['C3'] == 'X':
-        print("Player one won!")
-        return 1
-    # for diagonal
-    if board['A1'] == 'X' and board['B2'] == 'X' and board['C3'] == 'X':
-        print("Player one won!")
-        return 1 
-    # for vertical
-    if board['A1'] == 'X' and board['B1'] == 'X' and board['C1'] == 'X':
-        print("Player one won!")
-        return 1
-    if board['A2'] == 'X' and board['B2'] == 'X' and board['C2'] == 'X':
-        print("Player one won!")
-        return 1
-    if board['A3'] == 'X' and board['B3'] == 'X' and board['C3'] == 'X':
-        print("Player one won!")
-        return 1
-      
-    #checking for player 2
-    if board['A1'] == 'X' and board['A2'] == 'X' and board['A3'] == 'O':
-        print("Player one won!")
-        return 1
-    if board['B1'] == 'X' and board['B2'] == 'X' and board['B3'] == 'O':
-        print("Player one won!")
-        return 1
-    if board['C1'] == 'X' and board['C2'] == 'X' and board['C3'] == 'O':
-        print("Player one won!")
-        return 1
-    # for diagonal
-    if board['A1'] == 'X' and board['B2'] == 'X' and board['C3'] == 'O':
-        print("Player one won!")
-        return 1 
-    # for vertical
-    if board['A1'] == 'X' and board['B1'] == 'X' and board['C1'] == 'O':
-        print("Player one won!")
-        return 1
-    if board['A2'] == 'X' and board['B2'] == 'X' and board['C2'] == 'O':
-        print("Player one won!")
-        return 1
-    if board['A3'] == 'X' and board['B3'] == 'X' and board['C3'] == 'O':
-        print("Player one won!")
-        return 1
-    return 0
+    pass
+   
+
+def get_move(board, player): # do naprawienia błąd jeśli drugi znak nie jest liczbą
+    """Returns the coordinates of a valid move for player on board."""
+    row, col = 0, 0 
+    print("Podaj współrzędne na których umiescisz swój znak:",player)
+    input_user = input()
+    input_user = input_user.lower()
+    if input_user == 'quit':
+        print("Do zobaczenia !!!")
+        sys.exit()
+    elif len(input_user) != 2:
+        print("Podałeś niewłaściwą ilość znaków")
+        get_move(board,player)
+    else :
+        row = input_user[0]
+        col = int(input_user[1])
+    
+    if row == "a":
+        row = 0
+    elif row == "b":
+        row = 1
+    elif row == "c":
+        row = 2
+    
+    if input_user not in ["a1","a2","a3","b1","b2","b3","c1","c2","c3"]:
+        print("Podałeś złe współrzędne, spróbuj jeszcze raz : ")
+        row,col = get_move(board, player)
+    elif board[row][col-1] != ".":
+        print("Podałeś współrzędne na których już znajduje się jakiś znak : ")
+        row,col = get_move(board, player)
+    
+    return row, col
+
+def has_won(board,player): #dlaczego na starcie jest False?
+    
+    for i in range (0,3):
+        result =0
+        for j in range (0,3):
+            if board[i][j] == player:
+                result += 1
+            if result == 3:
+                return True
+            
+    for i in range (0,3):
+        result =0
+        for j in range (0,3):
+            if board[j][i] == player:
+                result += 1
+            if result == 3:
+                return True
+    result = 0
+    for i in range (0,3):
+        if board[i][i] == player:
+            result += 1
+        if result == 3:
+                return True
+    result = 0
+    j = 2
+    for i in range (0,3):
+        if board[i][j] == player:
+            result += 1
+        if result == 3:
+            return True
+        j -= 1
+    return False
 
 
 

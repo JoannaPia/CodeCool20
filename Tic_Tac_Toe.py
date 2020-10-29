@@ -1,8 +1,13 @@
 x = "x"
 o = "o"
 
-board = ['.','.','.','.','.','.','.','.','.']
+# board = [
+#     ['.','.', '.'],
+#     ['.','.', '.'],
+#     ['.','.', '.']
+# ]
 
+board = [['A1','A2','A3'],['B1','B2','B3'],['C1','C2','C3']]
 
 def start_game():
     print("""\n
@@ -18,32 +23,23 @@ def start_game():
             Hello everybody! You need choice "x" or "o" to start the game.
                                 GOOD LUCK! """)
 
-    init_board(9)
+    init_board(board)
 
     
-def init_board(number):
+def init_board(board): # dwie wersje
     
-# board = [['A1','A2','A3'],['B1','B2','B3'],['C1','C2','C3']]
 
-# for row in range(len(board)):
-#     for col in range(len(board[row])):
-#         print(board[row][col], end=' ')
-#     print()
-
-
-    board = {
-    'A1': '.', 'A2': '.', 'A3': '.',
-    'B1': '.', 'B2': '.', 'B3': '.',
-    'C1': '.', 'C2': '.', 'C3': '.',
-    }
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            print(board[row][col], end=' ')
+        print()
 
 
-    print("\n\t", "1""  "  , "2""  " ,  "3" )
-    print("\n\t""A" , board['A1'], "|", board['A2'], "|", board['A3'])
-    print("\t",   "---------")
-    print("\t""B", board['B1'], "|", board['B2'], "|", board['B3'])
-    print("\t",   "---------")
-    print("\t""C", board['C1'], "|", board['C2'], "|", board['C3'], "\n")
+    # for row in board:
+    #     for dots in row:
+    #         print(dots, end="")
+    #     print()
+
 
 
 def is_full(board): #Check for a full board
@@ -129,8 +125,7 @@ def has_won(board,player): #dlaczego na starcie jest False?
 
 def main():
     start_game()
-    making_a_move()
-    is_full()
+    
     
     
 

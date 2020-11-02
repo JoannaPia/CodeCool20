@@ -1,0 +1,24 @@
+﻿Funkcje i ich zadania wg wymagań ze strony „journey”
+Opis działania funkcji :
+- init_board
+	inicjuje pustą tablicę board a potem wypełnia ją znakiem ”.”
+- get_move
+	pobiera współrzędne do postawienia znaku. Znak x lub o „ukryty jest w zmiennej player,jej zmiana jest przeprowadzana w funkcji tictactoe która odpowiada za logikę gry. Do adresowania naszej tablicy gry używamy współrzędnych row i col. Użytkownik podaje współrzędne w formacie „litera_cyfra” np. a2. Poprawne litery to a,b,c i liczba 1,2,3. Zapisujemy do input user. Najpierw sprawdzamy czy użytkownik nie wpisał „quit” wtedy wychodzimy z gry,potem czy użytkownika podał dwa znaki. Dalej sprawdzamy czy wpisał dozwolone współrzędne i na koniec czy pole nie jest zajęte przez inny znak. Następnie zmieniamy podane przez użytkownika dane na „czysty” adres naszej tablicy np. a2 to 02. Na koniec zwracamy współrzędne row i col
+- mark
+	wstawia znak (player) do naszej tablicy na podane współrzędne row i col
+- has_won
+	sprawdza czy na której linii są trzy jednakowe znaki. Zaczyna poziomo potem pionowo i na koniec skosy. Jeśli w którymś są trzy znaki zwraca True
+- is_full
+	sprawdza czy wszystkie pola mają znaki x lub o. Twoja wersja dużo lepsza, sprawdza czy są ”.”
+- tictactoe
+	odpowiedzialna za logikę (przebieg) gry.
+	Inicjuje pusta tablicę
+	Wyświetla pustą tablicę
+	Ustawia pierwszego gracza x
+	user_count to taki wskaźnik gracza, nieparzysty to gracz x,parzysty to gracz o. zmienna zwiększana o 1 po każdej kolejce.
+	Dopóki nikt nie wygra i tablica nie jest pełna sprawdzamy parzystość gracza i pobieramy współrzędne na których ma stanąć znak
+	zaznaczamy na tablicy znak
+	wyświetlamy aktualny stan tablicy
+	wyświetlamy wynik gry, user_count po wyjściu z pętli
+- get_ai_move
+	generuje losowy ruch komputera,sprawdza tylko czy proponowana współrzędna jest pusta, nie ma jeszcze w tym żadnej taktyki.
